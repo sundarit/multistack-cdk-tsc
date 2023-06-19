@@ -2,9 +2,10 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { CdkmultistackStack } from '../lib/cdkmultistack-stack';
+import { Tags } from 'aws-cdk-lib';
 
 const app = new cdk.App();
-new CdkmultistackStack(app, 'CdkmultistackStack', {
+const vpcstack = new CdkmultistackStack(app, 'CdkmultistackStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -15,7 +16,11 @@ new CdkmultistackStack(app, 'CdkmultistackStack', {
 
   /* Uncomment the next line if you know exactly what Account and Region you
    * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
+  env: { account: '754737238120', region: 'us-east-1' },
+  appName: 'CDS004-App',
+  envName: 'prd'
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+Tags.of(vpcstack).add("CostCenter", "Sundari-CD");
